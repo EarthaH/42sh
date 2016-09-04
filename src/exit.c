@@ -2,7 +2,10 @@
 
 void    quit(char *line)
 {
-	free(line);
-	line = NULL;
+	if (line != NULL)
+	{
+		free(line);
+		line = NULL;
+	}
     exit(EXIT_SUCCESS);
 }

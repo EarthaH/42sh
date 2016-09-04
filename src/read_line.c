@@ -17,4 +17,9 @@ void		read_line(void)
 		}
 		read_line();
 	}
+	else
+	{
+		ft_putstr(M_MESS01);
+		quit(line);
+	}
 }
