@@ -19,6 +19,10 @@ SRC =	$(SRC_PATH)main.c				\
 	  
 BIN =  $(SRC:.c=.o)
 
+BIN_2 = $(INCL:.h=.h.gch)
+
+BIN_3 = $(LIB_INCL:.h=.h.gch)
+
 define colorecho
       @tput setaf 14
       @echo $1
@@ -44,9 +48,10 @@ $(NAME): qme
 	@mv ./a.out ./minishell
 	@clear
 	@$(call colorecho, "Minishell has successfully been compiled.\n")
+	@rm -f $(BIN)
 
 clean:
-	@rm -f $(BIN)
+	@rm -f $(BIN_2) $(BIN_3)
 	@$(call colorecho, "All object files have been removed. Please" \
 		"ensure no sourcefiles have accidently been removed.")
 	@make clean -C libft/
@@ -56,7 +61,6 @@ fclean: clean
 	@make fclean -C libft/
 	@$(call colorecho, "The executables ./minishell and " \
 		"./libft has been removed")
-	@rm -f $(INCL:.h=.h.gch)
 
 re: fclean all
 	@clear

@@ -5,9 +5,15 @@
 # include <unistd.h>
 # include <stdlib.h>
 
-# define PROMPT	"\e[31mCrystal> "
+# define PROMPT	"$> "
 
-# define M_MESS01 "\eMinishell could not read the command.\n"
+# define M_MESS01 "Minishell could not read the command.\n"
+# define M_MESS02 "zsh: command not found: "
+
+typedef struct	s_env
+{
+	char	**envp;
+}				t_env;
 
 /*
  * read_line.c
