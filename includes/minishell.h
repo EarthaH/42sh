@@ -3,4 +3,6 @@
 
 # include "../libft/includes/libft.h"
 
+void			read_line(void);
+
 #endif
