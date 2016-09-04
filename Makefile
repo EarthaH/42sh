@@ -15,6 +15,7 @@ LIB_A = -lm libft/libft.a
 SRC =	$(SRC_PATH)main.c				\
 		$(SRC_PATH)read_line.c			\
 		$(SRC_PATH)split_commands.c		\
+		$(SRC_PATH)env.c				\
 		$(SRC_PATH)exit.c				\
 	  
 BIN =  $(SRC:.c=.o)
