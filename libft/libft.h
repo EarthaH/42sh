@@ -6,7 +6,7 @@
 /*   By: meckhard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/21 11:20:43 by meckhard          #+#    #+#             */
-/*   Updated: 2016/09/04 13:09:10 by cdebruyn         ###   ########.fr       */
+/*   Updated: 2016/09/04 15:03:57 by cdebruyn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,7 @@ typedef struct		s_mods
     int	jay;
 }					t_mods;
 
+int					ft_charcmp(char a, char b);
 char				**ft_strnew2(size_t size);
 float				ft_atof(const char *str);
 char				*rm_padding(char *str);

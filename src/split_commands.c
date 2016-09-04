@@ -1,26 +1,31 @@
 #include "../includes/minishell.h"
 
-static int		created_commands(char *command)//, t_env *env)
+static int			created_commands(char *command)//, t_env *env)
 {
 	if (ft_strcmp(command, "echo") == 0)
-		return (0);
+		return (1);
 	if (ft_strcmp(command, "cd") == 0)
-		return (0);
+		return (2);
 	if (ft_strcmp(command, "env") == 0)
-		return (0);
+		return (3);
 	if (ft_strcmp(command, "setenv") == 0)
-		return (0);
+		return (4);
 	if (ft_strcmp(command, "unsetenv") == 0)
-		return (0);
+		return (5);
 	else
 		return (-1);
 }
 
 static void			validate_commands(char	**commands)
 {
-	if (created_commands(commands[0]) == 0)
-		;
-//	if (defined_commands(commands[0]) == 0)
+	int		type;
+	char	*com;
+
+	com = remove_path(command[0]);
+	if ((type = created_commands(com)) != -1)
+		/*In created functions is where we will add all our functions like env, cd, etc..*/
+		created_functions(commands, type);
+//	if (defined_commands(com) == 0)
 	else
 	{	
 		ft_putstr(M_MESS02);
@@ -28,7 +33,23 @@ static void			validate_commands(char	**commands)
 	}
 }
 
-void			split_commands(char *line)
+char				*remove_path(char *command)
+{
+	unsigned int	i;
+	unsigned int	j;
+	char			temp;
+	
+	i = ft_strlen(command);
+	j = i - 1;
+	while (ft_charcmp(command[j], '/') != 0 && \
+			ft_charcmp(command[j], ' ') && command[j])
+	{
+		j--;
+	}
+	temp = ft_strnew();
+}
+
+void				split_commands(char *line)
 {
 	char			**commands;
 	unsigned int	i;

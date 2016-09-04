@@ -6,7 +6,7 @@
 #    By: meckhard <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/05/21 10:10:24 by meckhard          #+#    #+#              #
-#    Updated: 2016/08/17 08:00:57 by cdebruyn         ###   ########.fr        #
+#    Updated: 2016/09/04 15:04:21 by cdebruyn         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,6 +14,7 @@ NAME = libft.a
 
 SRC = ft_memset.c			   \
 	  ft_itoa.c				   \
+	  ft_charcmp.c			   \
 	  ft_atof.c				   \
 	  ft_bzero.c			   \
 	  ft_memcpy.c			   \
