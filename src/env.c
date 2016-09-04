@@ -29,10 +29,8 @@ void    env(char **envp)
     int     i;
 
     i = 0;
-    printf("ENV:\n");
     while (envp[i] != NULL)
         printf("%s\n", envp[i++]);
-    printf("\n:END\n");
 }
 
 void    set_env(char **envp, char *s)
