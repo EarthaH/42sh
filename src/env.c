@@ -45,7 +45,7 @@ void    set_env(char **envp, char *s)
     j = 0;
     while (s[j - 1] != '\0')
     {
-        envp[i][j] = s1[j];
+        envp[i][j] = s[j];
         j++;
     }
 }
@@ -57,7 +57,7 @@ void    unset_env(char **envp, char *s)
     while (is_line(envp[i], s) == 0)
         i++;
     if (is_line(envp[i], s) == 1)
-        envp[i] == NULL;
+        envp[i] = NULL;
     else
         printf("ERROR: env not found !!!");
 }
