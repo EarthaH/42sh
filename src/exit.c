@@ -1,6 +1,8 @@
 #include "../includes/minishell.h"
 
-void    quit(void)
+void    quit(char *line)
 {
+	free(line);
+	line = NULL;
     exit(EXIT_SUCCESS);
 }

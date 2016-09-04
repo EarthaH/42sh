@@ -15,6 +15,6 @@ void			read_line(void);
  * exit.c
  */
 
-void			quit(void);
+void			quit(char *line);
 
 #endif
