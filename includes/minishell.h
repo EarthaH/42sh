@@ -5,6 +5,8 @@
 # include <unistd.h>
 # include <stdlib.h>
 
+# define PROMPT	"\e[31mCrystal> "
+
 # define M_MESS01 "\eMinishell could not read the command.\n"
 
 /*

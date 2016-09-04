@@ -5,7 +5,7 @@ void		read_line(void)
 	char	*line;
 
 	line = NULL;
-	ft_putstr("$> ");
+	ft_putstr(PROMPT);
 	if (get_next_line(0, &line) != -1)
 	{
 		if (line != NULL)
