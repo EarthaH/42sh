@@ -32,22 +32,18 @@ void    env(char **envp)
     int     i;
 
     i = 0;
+    printf("ENV:\n");
     while (envp[i] != NULL)
-        ft_putendl(envp[i++]);
+        printf("%s\n", envp[i++]);
+    printf("\n:END\n");
 }
 
 void    set_env(char **envp, char *s)
 {
     int     i;
-    int     j;
 
     i = len(envp);
-    j = 0;
-    while (s[j - 1] != '\0')
-    {
-        envp[i][j] = s[j];
-        j++;
-    }
+    envp[i] = s;
 }
 
 void    unset_env(char **envp, char *s)
@@ -61,17 +57,19 @@ void    unset_env(char **envp, char *s)
     else
         printf("ERROR: env not found !!!");
 }
-
 /*
 int     main(int ac, char **av, char **envp)
 {
     int     i = 0;
-    if (argc == 2)
-        printf("argv[1] %s\n", argv[1]);
-    while (envp[i] != NULL)
-    {
-        printf("envp: %s\n", envp[i++]);
-    }
+    if (ac == 2)
+        printf("argv[1] %s\n", av[1]);
+    env(envp);
+    set_env(envp, "ME=eartha");
+    printf("\n\n\t\t\tNEW ENV\n\n");
+    env(envp);
+    unset_env(envp, "ME");
+    printf("\n\n\t\t\tNEW ENV\n\n");
+    env(envp);    
     return (0);
 }
 */
