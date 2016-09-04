@@ -8,7 +8,7 @@ SRC_PATH = ./src/
 
 INCL = includes/minishell.h
 
-LIB_INCL = -L. libft/includes/libft.h
+LIB_INCL = -L. libft/libft.h
 
 LIB_A = -lm libft/libft.a
 

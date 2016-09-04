@@ -11,7 +11,7 @@ void		read_line(void)
 		if (line != NULL)
 		{
 			if (ft_strcmp(line, "exit") == 0)
-			42_exit();
+			quit();
 //			split_commands(line);
 		}
 		read_line();

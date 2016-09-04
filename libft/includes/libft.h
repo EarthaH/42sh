@@ -6,7 +6,7 @@
 /*   By: cdebruyn <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/16 08:48:16 by cdebruyn          #+#    #+#             */
-/*   Updated: 2016/09/04 12:40:13 by cdebruyn         ###   ########.fr       */
+/*   Updated: 2016/09/04 13:09:33 by cdebruyn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,8 @@
 
 # include <stdlib.h>
 # include <unistd.h>
+
+# define BUFF_SIZE	10
 
 # define E_MESS01	"\e[31mError:	Number of bytes to copy is undefined.\n"
 # define E_MESS02	"\e[31mError:	String is a pointer to NULL.\n"

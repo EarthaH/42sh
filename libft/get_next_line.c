@@ -6,11 +6,11 @@
 /*   By: meckhard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/16 08:01:36 by meckhard          #+#    #+#             */
-/*   Updated: 2016/09/04 13:19:41 by cdebruyn         ###   ########.fr       */
+/*   Updated: 2016/06/03 13:36:54 by meckhard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/libft.h"
+#include "libft.h"
 
 static	int		read_line(int const fd, char **stock)
 {
