@@ -12,7 +12,7 @@ LIB_INCL = -L. libft/includes/libft.h
 
 LIB_A = -lm libft/libft.a
 
-SRC =	
+SRC =	$(SRC_PATH)main.c				\
 	  
 BIN =  $(SRC:.c=.o)
 
