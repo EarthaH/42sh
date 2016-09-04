@@ -10,10 +10,14 @@ void		split_commands(char *line)
 	commands = ft_strsplit(line, ' ');
 	if (commands != NULL)
 	{
-		while (ft_strcmp(commands[i], "\0") != 0)
-		{
-			ft_putendl(commands[i]);
-			i++;
-		}
+
 	}	
+}
+
+void		validate_commands(char	**commands)
+{
+	if (created_commands(commands[0]) == 0)
+	if (defined_commands(commands[0]) == 0)
+	else
+		ft_putstr(M_MESS02);
 }
