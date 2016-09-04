@@ -21,10 +21,11 @@ static void			validate_commands(char	**commands)
 	int		type;
 	char	*com;
 
-	com = remove_path(command[0]);
+	com = remove_path(commands[0]);
 	if ((type = created_commands(com)) != -1)
+		;
 		/*In created functions is where we will add all our functions like env, cd, etc..*/
-		created_functions(commands, type);
+//		created_functions(commands, type);
 //	if (defined_commands(com) == 0)
 	else
 	{	
@@ -35,18 +36,20 @@ static void			validate_commands(char	**commands)
 
 char				*remove_path(char *command)
 {
-	unsigned int	i;
-	unsigned int	j;
-	char			temp;
+	int		i;
+	int		j;
+	char	*temp;
 	
 	i = ft_strlen(command);
 	j = i - 1;
 	while (ft_charcmp(command[j], '/') != 0 && \
-			ft_charcmp(command[j], ' ') && command[j])
+			ft_charcmp(command[j], ' ') && command[j] && j >= 0)
 	{
 		j--;
 	}
-	temp = ft_strnew();
+	temp = ft_strsub(command, j + 1, i - j);
+	ft_putendl(temp);
+	return (temp);
 }
 
 void				split_commands(char *line)
