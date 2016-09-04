@@ -1,7 +1,7 @@
 #include "../includes/minishell.h"
 
-int		main(void)
+int		main(int ac, char **av, char **envp)
 {
-	read_line();
+	read_line(envp);
 	return (0);
 }
