@@ -14,6 +14,12 @@
 void			read_line(void);
 
 /*
+ * split_commands.c
+ */
+
+void			split_commands(char *line);
+
+/*
  * exit.c
  */
 
