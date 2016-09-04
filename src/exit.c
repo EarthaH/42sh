@@ -1,4 +1,4 @@
-#include "42sh.h"
+#include "includes/minishell.h"
 
 void    42_exit(void)
 {
