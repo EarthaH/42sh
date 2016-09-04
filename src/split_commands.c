@@ -22,16 +22,25 @@ static void			validate_commands(char	**commands)
 	char	*com;
 
 	com = remove_path(commands[0]);
+//	com = check_quotes(com);
+	commands[0] = com;
 	if ((type = created_commands(com)) != -1)
-		;
-		/*In created functions is where we will add all our functions like env, cd, etc..*/
-//		created_functions(commands, type);
+		created_functions(commands, type);
 //	if (defined_commands(com) == 0)
 	else
 	{	
 		ft_putstr(M_MESS02);
 		ft_putendl(commands[0]);
 	}
+}
+
+void				created_functions(char **commands, int type)
+{
+	t_env	*te;
+
+	if (type == 3)
+		env(te->envp);
+//		ft_putendl(commands[0]);
 }
 
 char				*remove_path(char *command)
@@ -48,7 +57,6 @@ char				*remove_path(char *command)
 		j--;
 	}
 	temp = ft_strsub(command, j + 1, i - j);
-	ft_putendl(temp);
 	return (temp);
 }
 

@@ -1,7 +1,4 @@
 #include "../includes/minishell.h"
-#include <stdlib.h>
-#include <stdio.h>
-#include <unistd.h>
 
 static int  is_line(char *s1, char *s2)
 {
