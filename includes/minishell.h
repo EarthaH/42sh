@@ -26,6 +26,7 @@ void			read_line(void);
  */
 
 void			split_commands(char *line);
+char			*remove_path(char *command);
 
 /*
  * exit.c
