@@ -2,13 +2,15 @@
 
 int		main(int ac, char **av, char **envp)
 {
-	t_env	env;
+	t_env			te;
+	unsigned int	i;
 
+	i = 0;
 	if (ac == 1)	
 	{
 		(void)av;
-		env.envp = envp;
-		read_line();
+		te.envp = envp;
+		read_line(&te);
 	}
 	return (0);
 }

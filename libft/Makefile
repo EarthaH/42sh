@@ -6,7 +6,7 @@
 #    By: meckhard <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/05/21 10:10:24 by meckhard          #+#    #+#              #
-#    Updated: 2016/09/04 15:04:21 by cdebruyn         ###   ########.fr        #
+#    Updated: 2016/09/05 10:13:36 by cdebruyn         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,6 +14,8 @@ NAME = libft.a
 
 SRC = ft_memset.c			   \
 	  ft_itoa.c				   \
+	  ft_toupper2.c				\
+	  ft_isalpha2.c				\
 	  ft_charcmp.c			   \
 	  ft_atof.c				   \
 	  ft_bzero.c			   \
@@ -73,6 +75,7 @@ SRC = ft_memset.c			   \
 	  ft_lstiter.c			   \
 	  ft_strnew2.c			   \
 	  ft_lstmap.c			   \
+	  ft_strlen2.c				\
 	  rm_padding.c				\
 	  get_next_line.c			\
 

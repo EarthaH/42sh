@@ -26,21 +26,32 @@ static int  len(char **s)
 
 void    env(char **envp)
 {
-    int     i;
+    unsigned int	i;
+	char			temp;
+	char			**arr;
 
     i = 0;
-    printf("ENV:\n");
-    while (envp[i] != NULL)
-        printf("%s\n", envp[i++]);
-    printf("\n:END\n");
+	while (envp[i] != NULL)
+        ft_putendl(envp[i++]);
+//	if ((temp = set_env(commands)) != NULL)
 }
 
-void    set_env(char **envp, char *s)
+void	set_env(char **envp, char **commands)
 {
-    int     i;
+    unsigned int	i;
 
-    i = len(envp);
-    envp[i] = s;
+	i = len(envp);
+	if ((ft_isalpha2(commands[1]) == 0) && (commands[1] != NULL))
+	{
+		ft_toupper2(commands[1]);
+		if (commands[2] != NULL)
+		{
+			commands[1] = ft_strjoin(commands[1], "=");
+			commands[1] = ft_strjoin(commands[1], commands[2]);
+		}
+		envp[i] = ft_strdup(commands[1]);
+		envp[i + 1] = NULL;
+	}
 }
 
 void    unset_env(char **envp, char *s)
@@ -54,19 +65,3 @@ void    unset_env(char **envp, char *s)
     else
         printf("ERROR: env not found !!!");
 }
-/*
-int     main(int ac, char **av, char **envp)
-{
-    int     i = 0;
-    if (ac == 2)
-        printf("argv[1] %s\n", av[1]);
-    env(envp);
-    set_env(envp, "ME=eartha");
-    printf("\n\n\t\t\tNEW ENV\n\n");
-    env(envp);
-    unset_env(envp, "ME");
-    printf("\n\n\t\t\tNEW ENV\n\n");
-    env(envp);    
-    return (0);
-}
-*/

@@ -20,23 +20,30 @@ typedef struct	s_env
  * read_line.c
  */
 
-void			read_line(void);
+void			read_line(t_env *te);
 
 /*
  * split_commands.c
  */
 
-void			split_commands(char *line);
+void			split_commands(char *line, t_env *te);
 char			*remove_path(char *command);
-void			created_functions(char **commands, int type);
+void			created_functions(char **commands, int type, t_env *te);
 
 /*
  * env.c
  */
 
 void			env(char **envp);
-void			set_env(char **envp, char *s);
+void			set_env(char **envp, char **commands);
 void			unset_env(char **envp, char *s);
+
+/*
+ * re_malloc.c
+ */
+
+char			**re_2d_malloc(char **arr, size_t size);
+char			***re_3d_malloc(char ***arr, size_t size);
 
 /*
  * exit.c

@@ -16,7 +16,7 @@ static int			created_commands(char *command)//, t_env *env)
 		return (-1);
 }
 
-static void			validate_commands(char	**commands)
+static void			validate_commands(char	**commands, t_env *te)
 {
 	int		type;
 	char	*com;
@@ -25,7 +25,7 @@ static void			validate_commands(char	**commands)
 //	com = check_quotes(com);
 	commands[0] = com;
 	if ((type = created_commands(com)) != -1)
-		created_functions(commands, type);
+		created_functions(commands, type, te);
 //	if (defined_commands(com) == 0)
 	else
 	{	
@@ -34,13 +34,12 @@ static void			validate_commands(char	**commands)
 	}
 }
 
-void				created_functions(char **commands, int type)
+void				created_functions(char **commands, int type, t_env *te)
 {
-	t_env	*te;
-
 	if (type == 3)
 		env(te->envp);
-//		ft_putendl(commands[0]);
+	if (type == 4)
+		set_env(te->envp, commands);
 }
 
 char				*remove_path(char *command)
@@ -60,7 +59,7 @@ char				*remove_path(char *command)
 	return (temp);
 }
 
-void				split_commands(char *line)
+void				split_commands(char *line, t_env *te)
 {
 	char			**commands;
 	unsigned int	i;
@@ -70,6 +69,6 @@ void				split_commands(char *line)
 	commands = ft_strsplit(line, ' ');
 	if (commands != NULL)
 	{
-		validate_commands(commands);
+		validate_commands(commands, te);
 	}	
 }

@@ -1,6 +1,6 @@
 #include "../includes/minishell.h"
 
-void		read_line(void)
+void		read_line(t_env *te)
 {
 	char	*line;
 
@@ -13,9 +13,9 @@ void		read_line(void)
 			if (ft_strcmp(line, "exit") == 0 || \
 					ft_strcmp(line, "EXIT") == 0)
 			quit(line);
-			split_commands(line);
+			split_commands(line, te);
 		}
-		read_line();
+		read_line(te);
 	}
 	else
 	{
