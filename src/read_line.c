@@ -6,8 +6,9 @@ void		read_line(t_env *te)
 
 	line = NULL;
 	ft_putstr(PROMPT);
-	if (get_next_line(0, &line) != -1)
+	if (get_next_line(0, &line) > 0)
 	{
+		line = rm_padding(line);
 		if (line != NULL)
 		{
 			if (ft_strcmp(line, "exit") == 0 || \

@@ -19,7 +19,7 @@ void	ft_putarr(char **arr)
 	i = 0;
 	if (arr != NULL)
 	{
-		while (ft_strcmp(arr[i], "\0") != 0)
+		while (arr[i] != NULL)
 		{
 			ft_putendl(arr[i]);
 			i++;

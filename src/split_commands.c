@@ -54,9 +54,7 @@ char				*remove_path(char *command)
 	j = i - 1;
 	while (command[j] == '/' && \
 		command[j] == ' ' && command[j] && j >= 0)
-	{
 		j--;
-	}
 	temp = ft_strsub(command, j + 1, i - j);
 	return (temp);
 }
@@ -70,7 +68,5 @@ void				split_commands(char *line, t_env *te)
 	commands = NULL;
 	commands = ft_strsplit(line, ' ');
 	if (commands != NULL)
-	{
 		validate_commands(commands, te);
-	}	
 }
