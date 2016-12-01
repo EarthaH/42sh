@@ -3,72 +3,57 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strsplit.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cdebruyn <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: khansman <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/08/01 11:29:41 by cdebruyn          #+#    #+#             */
-/*   Updated: 2016/09/04 13:42:43 by cdebruyn         ###   ########.fr       */
+/*   Created: 2016/05/15 15:57:41 by khansman          #+#    #+#             */
+/*   Updated: 2016/05/15 15:58:17 by khansman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static unsigned int	ft_char(char *str, char c)
+static int	ft_tab_count(const char *str, char c)
 {
-	unsigned int	i;
-	unsigned int	j;
+	int		k;
 
-	i = 0;
-	j = 0;
-	while (str[i] != '\0')
+	k = 1;
+	while (str)
 	{
-		if (str[i] == c)
-			j++;
-		i++;
+		str = ft_strchr(str, c);
+		while (str && *str == c)
+			++str;
+		if (!str || !*str)
+			return (k);
+		k++;
 	}
-	return (j);
+	return (k);
 }
 
-static void			split_main(t_split *sp, char *temp, char **split, char c)
+char		**ft_strsplit(char const *s, char c)
 {
-	while (temp[sp->j] != '\0' && temp[sp->j])
+	char	**arr;
+	int		k;
+	char	*tmp;
+	char	**result;
+
+	if (!s)
+		return (NULL);
+	while (*s == c)
+		++s;
+	if (!*s)
+		return ((char **)ft_strnew(sizeof(char *)));
+	k = ft_tab_count(s, c) + 1;
+	if (!(arr = (char **)ft_strnew((k) * sizeof(char *))))
+		return (NULL);
+	result = arr;
+	while (--k)
 	{
-		sp->k = sp->j;
-		while (temp[sp->k] != c && temp[sp->k] != '\0')
-		{
-			sp->k++;
-		}
-		split[sp->i] = ft_strnew(sp->k - sp->j);
-		sp->k = sp->j;
-		sp->l = 0;
-		while (temp[sp->k] != c && temp[sp->k] != '\0')
-		{
-			split[sp->i][sp->l] = temp[sp->k];
-			sp->k++;
-			sp->l++;
-		}
-		split[sp->i][sp->l] = '\0';
-		sp->j = sp->k;
-		sp->i++;
-		sp->j++;
+		tmp = ft_strchr(s, c);
+		if (!tmp && (*(arr++) = ft_strdup(s)))
+			break ;
+		*(arr++) = ft_strsub(s, 0, tmp - s);
+		SKP_BLK;
+		s = tmp;
 	}
-}
-
-char				**ft_strsplit(char *str, char c)
-{
-	char	*temp;
-	char	**split;
-	t_split	sp;
-
-	if (str == NULL)
-		return (NULL);
-	sp.j = 0;
-	temp = rm_padding(str);
-	if (temp == NULL)
-		return (NULL);
-	sp.i = ft_char(temp, c);
-	split = ft_strnew2(sp.i + 2);
-	sp.i = 0;
-	split_main(&sp, temp, split, c);
-	split[sp.i] = "\0";
-	return (split);
+	return (result);
 }

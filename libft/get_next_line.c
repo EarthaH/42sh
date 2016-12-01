@@ -3,60 +3,100 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: meckhard <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: khansman <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/05/16 08:01:36 by meckhard          #+#    #+#             */
-/*   Updated: 2016/06/03 13:36:54 by meckhard         ###   ########.fr       */
+/*   Created: 2016/11/13 16:59:24 by khansman          #+#    #+#             */
+/*   Updated: 2016/11/14 07:38:52 by khansman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static	int		read_line(int const fd, char **stock)
+static void		remalloc(char **line, int len)
 {
-	char	*buff;
-	int		ret;
-	char	*temp;
+	char			*tmp;
 
-	if (!(buff = ft_strnew(sizeof(*buff) * (BUFF_SIZE + 1))))
-		return (-1);
-	ret = read(fd, buff, BUFF_SIZE);
-	if (ret > 0)
+	tmp = *line;
+	*line = ft_strnew(len + LINE_SIZE + 2);
+	if (len != -1)
 	{
-		buff[ret] = '\0';
-		temp = ft_strjoin(*stock, buff);
-		free(*stock);
-		*stock = temp;
+		ft_memcpy(*line, tmp, len + 1);
+		free(tmp);
 	}
-	free(buff);
-	return (ret);
 }
 
-int				get_next_line(int const fd, char **line)
+static void		get_buff(t_buff **buff, int fd)
 {
-	static char			*str = NULL;
-	char				*bn;
-	int					ret;
+	static t_buff	buffs[NUM_BUFF];
+	int				k;
 
-	if ((!str && (str = ft_strnew(sizeof(*str))) == NULL) || !line
-		|| fd < 0 || BUFF_SIZE < 0)
-		return (-1);
-	bn = ft_strchr(str, '\n');
-	while (bn == NULL)
-	{
-		ret = read_line(fd, &str);
-		if (ret == 0)
+	k = -1;
+	while (++k < NUM_BUFF)
+		if (buffs[k].active && buffs[k].fd == fd)
 		{
-			if (ft_strlen(str) == 0)
-				return (0);
-			str = ft_strjoin(str, "\n");
+			*buff = &buffs[k];
+			return ;
 		}
-		if (ret < 0)
-			return (-1);
-		else
-			bn = ft_strchr(str, '\n');
+	k = -1;
+	while (++k < NUM_BUFF)
+	{
+		if (!buffs[k].active)
+		{
+			ft_bzero(&buffs[k], sizeof(t_buff));
+			buffs[k].fd = fd;
+			*buff = &buffs[k];
+			return ;
+		}
 	}
-	*line = ft_strsub(str, 0, ft_strlen(str) - ft_strlen(bn));
-	str = ft_strdup(bn + 1);
+	ft_bzero(&buffs[0], sizeof(t_buff));
+	buffs[k].fd = fd;
+	*buff = &buffs[0];
+}
+
+static int		read_line(t_buff *buff)
+{
+	if (!ACTIVE)
+		ACTIVE = 1;
+	else if (RET < BUFF_SIZE)
+	{
+		ACTIVE = 0;
+		RET = 0;
+		return (0);
+	}
+	else
+		ft_bzero(&BUFF, BUFF_SIZE);
+	RET = read(B_FD, BUFF, BUFF_SIZE);
+	POS = 0;
+	if (RET == -1)
+	{
+		ACTIVE = 0;
+		return (RET);
+	}
+	return (1);
+}
+
+int				get_next_line(const int fd, char **line)
+{
+	t_buff			*buff;
+
+	if (BUFF_SIZE < 1)
+		return (-1);
+	get_buff(&buff, fd);
+	if ((!ACTIVE || (POS > RET)) && !read_line(buff))
+		return (RET);
+	L = -1;
+	while (BUFF[POS] != '\n' && BUFF[POS] != 26)
+	{
+		if (POS > RET && !read_line(buff))
+			return (RET);
+		if (BUFF[POS] == '\n' || BUFF[POS] == 26)
+			break ;
+		if (((L + 1) % LINE_SIZE) == 0 || L == -1)
+			remalloc(&LINE, L);
+		LINE[++L] = BUFF[POS];
+		POS++;
+	}
+	*line = (L == -1) ? ft_strnew(4) : LINE;
+	POS++;
 	return (1);
 }

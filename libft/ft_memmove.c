@@ -6,7 +6,7 @@
 /*   By: meckhard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/21 10:38:20 by meckhard          #+#    #+#             */
-/*   Updated: 2016/05/21 10:38:25 by meckhard         ###   ########.fr       */
+/*   Updated: 2016/10/24 08:48:59 by cdebruyn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,24 +14,9 @@
 
 void	*ft_memmove(void *s1, const void *s2, size_t n)
 {
-	char		*ss1;
-	const char	*ss2;
-	char		tmp[n];
-	size_t		i;
-
-	i = 0;
-	ss1 = (char *)s1;
-	ss2 = (const char *)s2;
-	while (i < n)
-	{
-		tmp[i] = ss2[i];
-		i++;
-	}
-	i = 0;
-	while (i < n)
-	{
-		ss1[i] = tmp[i];
-		i++;
-	}
+	if (s1 < s2)
+		return ft_memcpy(s1, s2, n);
+	if (s1 > s2)	
+		ft_memcpy_bwd(s1, s2, n);
 	return (s1);
 }

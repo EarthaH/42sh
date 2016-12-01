@@ -17,6 +17,7 @@ SRC =	$(SRC_PATH)main.c				\
 		$(SRC_PATH)split_commands.c		\
 		$(SRC_PATH)env.c				\
 		$(SRC_PATH)re_malloc.c			\
+		$(SRC_PATH)fork_process.c		\
 		$(SRC_PATH)exit.c				\
 	  
 BIN =  $(SRC:.c=.o)

@@ -24,9 +24,11 @@ static void			validate_commands(char	**commands, t_env *te)
 	com = remove_path(commands[0]);
 //	com = check_quotes(com);
 	commands[0] = com;
-	if ((type = created_commands(com)) != -1)
+	if ((type = created_commands(com)) > 0)
 		created_functions(commands, type, te);
 //	if (defined_commands(com) == 0)
+	else if (type < 0)
+		fork_process(commands, te);
 	else
 	{	
 		ft_putstr(M_MESS02);
@@ -50,8 +52,8 @@ char				*remove_path(char *command)
 	
 	i = ft_strlen(command);
 	j = i - 1;
-	while (ft_charcmp(command[j], '/') != 0 && \
-			ft_charcmp(command[j], ' ') && command[j] && j >= 0)
+	while (command[j] == '/' && \
+		command[j] == ' ' && command[j] && j >= 0)
 	{
 		j--;
 	}

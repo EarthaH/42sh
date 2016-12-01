@@ -5,6 +5,7 @@
 # include <unistd.h>
 # include <stdlib.h>
 # include <stdio.h>
+# include <sys/wait.h>
 
 # define PROMPT	"$> "
 
@@ -44,6 +45,12 @@ void			unset_env(char **envp, char *s);
 
 char			**re_2d_malloc(char **arr, size_t size);
 char			***re_3d_malloc(char ***arr, size_t size);
+
+/*
+ * fork_process.c
+ */
+
+int    			fork_process(char **commands, t_env *te);
 
 /*
  * exit.c
