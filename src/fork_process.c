@@ -1,5 +1,4 @@
 #include "../includes/minishell.h"
-#include <stdio.h>
 
 int    fork_process(char **commands, t_env *te)
 {
@@ -7,16 +6,17 @@ int    fork_process(char **commands, t_env *te)
     int     status;
     char    *path;
 
-    ft_putarr(commands);
     path = ft_strjoin("/bin/", commands[0]);
-    path = rm_padding(path);
-    printf("path: %s\n", path);
     pid = fork();
-//    if (pid < 0)
-//        error("Error: fork()");
+    if (pid < 0)
+        error("Error: fork()");
     if (pid == 0)
     {
-        execve(path, commands, te->envp);
+        if (execve(path, commands, NULL) < 0)
+        {
+         ft_putstr("zsh: command not found: "); 
+         ft_putendl(commands[0]);
+        }
         exit(0);
     }
     else

@@ -12,14 +12,11 @@ LIB_INCL = -L. libft/libft.h
 
 LIB_A = -lm libft/libft.a
 
-SRC =	$(SRC_PATH)main.c				\
-		$(SRC_PATH)read_line.c			\
-		$(SRC_PATH)split_commands.c		\
-		$(SRC_PATH)env.c				\
-		$(SRC_PATH)re_malloc.c			\
-		$(SRC_PATH)fork_process.c		\
-		$(SRC_PATH)exit.c				\
-	  
+FILES = main.c read_line.c split_commands.c env.c re_malloc.c \
+fork_process.c exit.c
+
+SRC = $(addprefix $(SRC_PATH), $(FILES))
+
 BIN =  $(SRC:.c=.o)
 
 BIN_2 = $(INCL:.h=.h.gch)
@@ -42,26 +39,24 @@ all: $(NAME)
 
 $(NAME): qme
 	@$(call colorecho,"\nPreparing to compile minishell...")
-	@make re -C libft/
+	@make re -C libft
+	@make clean -C libft
 	@$(CC) $(C_FLAGS) -c $(SRC) $(INCL)
 	@mv *.o src/
-	@$(call colorecho,"Library has successfully compiled and object" \
-		"files have been created and moved to src/")
 	@$(CC) $(C_FLAGS) $(BIN) $(LIB_INCL) $(LIB_A)
 	@mv ./a.out ./minishell
 	@clear
 	@$(call colorecho, "Minishell has successfully been compiled.\n")
-	@rm -f $(BIN)
 
 clean:
-	@rm -f $(BIN_2) $(BIN_3)
+	@rm -rf $(BIN) $(BIN_2) $(BIN_3)
 	@$(call colorecho, "All object files have been removed. Please" \
 		"ensure no sourcefiles have accidently been removed.")
-	@make clean -C libft/
+	@make clean -C libft
 
 fclean: clean
 	@rm -f $(NAME)
-	@make fclean -C libft/
+	@make fclean -C libft
 	@$(call colorecho, "The executables ./minishell and " \
 		"./libft has been removed")
 

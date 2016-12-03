@@ -52,8 +52,8 @@ char				*remove_path(char *command)
 	
 	i = ft_strlen(command);
 	j = i - 1;
-	while (command[j] == '/' && \
-		command[j] == ' ' && command[j] && j >= 0)
+	while (command[j] != '/' && \
+		command[j] != ' ' && command[j] && j >= 0)
 		j--;
 	temp = ft_strsub(command, j + 1, i - j);
 	return (temp);
